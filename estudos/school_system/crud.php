@@ -4,6 +4,6 @@ class Contato{
     private $pdo;
 
     public function __construct(){
-        $this->pdo = new PDO("mysql")
+        $this->pdo = new PDO("mysql");
     }
 }
