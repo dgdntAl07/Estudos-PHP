@@ -18,7 +18,7 @@ class Students
     public function adicionar($email, $nome = '', $pass)
     {
         if ($this->existeEmail($email) == false) {
-            $sql = 'INSERT INTO formularios (nome,email,pass) VALUES (:nome,:email,:pass)';
+            $sql = 'INSERT INTO userForms (nome,email,pass) VALUES (:nome,:email,:pass)';
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(':nome', $nome);
             $sql->bindValue(':email', $email);
@@ -34,7 +34,7 @@ class Students
     //Read
     public function getNome($email)
     {
-        $sql = 'SELECT nome FROM formulario WHERE email = :email';
+        $sql = 'SELECT nome FROM userForms WHERE email = :email';
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(':email', $email);
         $sql->execute();
@@ -72,18 +72,12 @@ class Students
         }
     }
 
-    private function excluir($email)
+    private function excluir($id)
     {
-        if ($this->existeEmail($email)) {
-            $sql = 'DELETE FROM userForms WHERE email = :email';
-            $sql = $this->pdo->prepare($sql);
-            $sql->bindValue(':email', $email);
-            $sql->execute();
-
-            return true;
-        } else {
-            return false;
-        }
+        $sql = 'DELETE FROM userForms WHERE id = :id';
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(':id', $id);
+        $sql->execute();
     }
     private function existeEmail($email)
     {
